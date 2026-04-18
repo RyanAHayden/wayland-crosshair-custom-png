@@ -53,6 +53,8 @@ static void activate(GtkApplication *app, gpointer _) {
     gtk_layer_set_anchor(GTK_WINDOW(win), GTK_LAYER_SHELL_EDGE_RIGHT,  TRUE);
     gtk_layer_set_anchor(GTK_WINDOW(win), GTK_LAYER_SHELL_EDGE_TOP,    TRUE);
     gtk_layer_set_anchor(GTK_WINDOW(win), GTK_LAYER_SHELL_EDGE_BOTTOM, TRUE);
+    /* -1 = ignore exclusive zones from bars/docks, use full screen dimensions */
+    gtk_layer_set_exclusive_zone(GTK_WINDOW(win), -1);
 
     GtkWidget *da = gtk_drawing_area_new();
     g_signal_connect(da, "draw", G_CALLBACK(on_draw), NULL);
