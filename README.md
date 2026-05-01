@@ -1,10 +1,8 @@
 # wayland-crosshair
 
-Forked to include custom png crosshair argument (Thanks claude)
+A minimal custom crosshair overlay for Wayland compositors (Hyprland, Sway, etc.).
 
-A minimal crosshair overlay for Wayland compositors (Hyprland, Sway, etc.).
-
-Displays a small green dot at the exact center of your screen as a fullscreen transparent overlay. Designed for gaming — it is completely invisible to the input system: no focus, no keyboard grabs, no mouse interception. Clicks and cursor movement pass straight through to the game underneath.
+Displays a small green dot (or custom .png) at the exact center of your screen as a fullscreen transparent overlay. Designed for gaming — it is completely invisible to the input system: no focus, no keyboard grabs, no mouse interception. Clicks and cursor movement pass straight through to the game underneath.
 
 Optionally launches `wlsunset` alongside it for a gamma boost, killing it automatically on exit.
 
