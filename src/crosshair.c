@@ -32,17 +32,30 @@ static gboolean on_draw(GtkWidget *w, cairo_t *cr, gpointer _) {
     cairo_set_source_rgba(cr, 0, 0, 0, 0);
     cairo_paint(cr);
     if (image_path) {
-        cairo_surface_t *img = cairo_image_surface_create_from_png(image_path);
-        double iw = cairo_image_surface_get_width(img);
-        double ih = cairo_image_surface_get_height(img);
-        cairo_set_source_surface(cr, img, (a.width - iw) / 2.0, (a.height - ih) / 2.0);
-        cairo_paint(cr);
-        cairo_surface_destroy(img);
-    } else {
-        cairo_set_source_rgb(cr, 0, 1, 0);
-        cairo_arc(cr, a.width / 2.0, a.height / 2.0, RADIUS, 0, 2 * G_PI);
-        cairo_fill(cr);
+        static cairo_surface_t *img = NULL;
+        static cairo_status_t img_status = CAIRO_STATUS_SUCCESS;
+
+        if (!img) {
+            img = cairo_image_surface_create_from_png(image_path);
+            img_status = cairo_surface_status(img);
+            if (img_status != CAIRO_STATUS_SUCCESS) {
+                g_printerr("Failed to load PNG '%s': %s\n", image_path, cairo_status_to_string(img_status));
+            }
+        }
+
+        if (img_status == CAIRO_STATUS_SUCCESS) {
+            double iw = cairo_image_surface_get_width(img);
+            double ih = cairo_image_surface_get_height(img);
+            cairo_set_source_surface(cr, img, (a.width - iw) / 2.0, (a.height - ih) / 2.0);
+            cairo_paint(cr);
+            return FALSE;
+        }
+        /* fall through to default dot on error */
     }
+
+    cairo_set_source_rgb(cr, 0, 1, 0);
+    cairo_arc(cr, a.width / 2.0, a.height / 2.0, RADIUS, 0, 2 * G_PI);
+    cairo_fill(cr);
     return FALSE;
 }
 
