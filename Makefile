@@ -1,5 +1,5 @@
 CC     = gcc
-PKGS   = gtk+-3.0 gtk-layer-shell-0
+PKGS   = gtk+-3.0 gtk-layer-shell-0 wayland-client
 CFLAGS = $(shell pkg-config --cflags $(PKGS)) -O2 -Wall -Wextra
 LIBS   = $(shell pkg-config --libs $(PKGS))
 
