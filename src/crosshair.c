@@ -123,6 +123,9 @@ static gboolean on_draw(GtkWidget *w, cairo_t *cr, gpointer _) {
             cairo_translate(cr, (a.width - iw) / 2.0, (a.height - ih) / 2.0);
             cairo_scale(cr, 1.0 / scale, 1.0 / scale);
             cairo_set_source_surface(cr, img, 0, 0);
+            /* Nearest-neighbor: cairo's default bilinear filter blurs the source
+             * pixels whenever the compensating scale isn't a clean integer. */
+            cairo_pattern_set_filter(cairo_get_source(cr), CAIRO_FILTER_NEAREST);
             cairo_paint(cr);
             cairo_restore(cr);
             return FALSE;
