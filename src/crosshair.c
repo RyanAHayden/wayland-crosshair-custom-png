@@ -181,7 +181,8 @@ int main(int argc, char **argv) {
         } else if ((strcmp(argv[i], "--gamma") == 0 || strcmp(argv[i], "-g") == 0) && i + 1 < argc) {
             gamma = argv[++i];
         } else {
-            gamma = argv[i];
+            g_printerr("Unknown argument: %s\n", argv[i]);
+            return 1;
         }
     }
     if (gamma)

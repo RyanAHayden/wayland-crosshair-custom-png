@@ -45,14 +45,13 @@ make
 ./crosshair --image /path/to/crosshair.png
 ./crosshair -i /path/to/crosshair.png
 
-# Custom PNG + gamma boost
-./crosshair -i /path/to/crosshair.png --gamma 1.3
+# Example Custom PNG + gamma boost
+./crosshair -i dot.png -g 1.3
 
 # Gamma boost only (value is passed to wlsunset -g)
 ./crosshair --gamma 1.2   # subtle
 ./crosshair --gamma 1.3   # moderate
 ./crosshair --gamma 1.5   # strong
-./crosshair 1.3           # positional form still works
 ```
 
 | Flag | Short | Description |
